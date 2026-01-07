@@ -1,0 +1,76 @@
+import { Separator } from "@radix-ui/react-separator"
+import { Card, CardContent, CardHeader } from "./ui/card"
+
+const PowerEstimation = () => {
+
+
+    const data = [
+        { name: "Playstation 5 Slim", kwh: "351 kWh", price: "Rp 35.401" },
+        { name: "Television 32”", kwh: "4310 kWh", price: "Rp 38.892" },
+        { name: "Air Conditioner", kwh: "132 kWh", price: "Rp 250.309" },
+    ]
+
+    return (
+        <Card className="gap-2">
+            <CardHeader>
+                Power Estimation
+            </CardHeader>
+            <CardContent>
+                <div className="flex justify-between border bg-linear-to-t from-[#FAF5EB50] to-[#FAF5EB] rounded-xl p-3 h-30">
+
+                    <div className="flex flex-col justify-between w-1/2">
+
+                        <span className="text-sm"> Per Day </span>
+
+                        <div className="flex flex-col">
+                            <span className="text-sm"> 231 kWh </span>
+
+                            <span className="text-lg font-semibold"> Rp 23.401 </span>
+                        </div>
+                    </div>
+
+                    <div className="flex w-1/2">
+                        <div className="w-px h-full bg-gray-300"></div>
+
+                        <div className="flex flex-col justify-between ml-3">
+
+                            <span className="text-sm"> Per Day </span>
+
+                            <div className="flex flex-col">
+                                <span className="text-sm"> 231 kWh </span>
+
+                                <span className="text-lg font-semibold"> Rp 23.401 </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <Card className="w-full rounded-2xl bg-secondary p-0! gap-0 shadow-none mt-4">
+                    {data.map((item, i) => (
+                        <div key={i}>
+                            <div className="flex items-center justify-between px-5 py-4 text-xs lg:text-sm">
+                                <span className="font-medium w-[35%]">{item.name}</span>
+                                <span className="text-muted-foreground text-right w-[30%]">{item.kwh}</span>
+                                <span className="font-medium text-right w-[30%]">{item.price}</span>
+                            </div>
+                            {i !== data.length - 1 && <hr />}
+                        </div>
+                    ))}
+                </Card>
+
+
+                <div className="text-muted/70 text-xs lg:text-sm mt-8">
+                    <p>Electricity rates: Rp1.699/kWh (PLN R-2 3.500 VA)</p>
+                    <p>This calculation is only an estimate, not a fixed price</p>
+                </div>
+
+            </CardContent>
+
+        </Card>
+
+    )
+}
+
+export default PowerEstimation
