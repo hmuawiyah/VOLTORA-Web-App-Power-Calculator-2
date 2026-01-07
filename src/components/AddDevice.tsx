@@ -66,9 +66,9 @@ const grouped = data.reduce<Record<Category, Item[]>>(
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="flex justify-between w-full px-6 rounded-xl">
-          <span>Add Device</span>
-          <LuPlus />
+        <Button variant={'primary'} className="flex justify-between w-full h-full px-6! LG rounded-xl shadow-md">
+          <span className="text-base lg:text-lg">Add Device</span>
+          <LuPlus className="size-5" />
         </Button>
       </DialogTrigger>
 

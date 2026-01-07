@@ -12,17 +12,18 @@ const InputPlusMinus = () => {
 
       <div className="flex justify-between items-center w-fit">
         <Button variant={'ghost'} size={'sm'}>
-          <LuPlus className="size-3 font-black" strokeWidth={3} />
+          <LuMinus className="size-3 font-black" strokeWidth={3} />
         </Button>
 
         <input type="number" className="h-9 w-full text-center" />
 
         <Button variant={'ghost'} size={'sm'}>
-          <LuMinus className="size-3 font-black" strokeWidth={3} />
+          <LuPlus className="size-3 font-black" strokeWidth={3} />
         </Button>
       </div>
 
-      <span className="text-xs lg:text-sm font-semibold w-auto mx-3 lg:mx-6">Qty</span>
+      <span className="text-xs lg:text-sm font-semibold w-auto mx-3 lg:mx-6 hidden lg:block">quantity</span>
+      <span className="text-xs lg:text-sm font-semibold w-auto mx-3 lg:mx-6 block lg:hidden">qty</span>
 
     </div>
   )

@@ -46,8 +46,23 @@ const PowerEstimation = () => {
 
                 </div>
 
+                <div className="flex flex-col justify-between border bg-linear-to-t from-[#ebfaee50] to-[#ebfaee] h-23 p-3 mt-4 rounded-xl">
+                    <span className="text-xs lg:text-sm">
+                        Electricity rates
+                    </span>
 
-                <Card className="w-full rounded-2xl bg-secondary p-0! gap-0 shadow-none mt-4">
+                    <div className="flex justify-between text-lg font-semibold">
+                        <span>
+                            Rp1.699/kWh
+                        </span>
+                        <span>
+                            PLN R-2 3.500 VA
+                        </span>
+                    </div>
+                </div>
+
+
+                <Card className="w-full rounded-xl bg-secondary p-0! gap-0 shadow-none mt-4">
                     {data.map((item, i) => (
                         <div key={i}>
                             <div className="flex items-center justify-between px-5 py-4 text-xs lg:text-sm">

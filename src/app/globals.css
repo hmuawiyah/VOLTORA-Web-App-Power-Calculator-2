@@ -63,16 +63,10 @@
   --popover-foreground: oklch(0.145 0 0);
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
-<<<<<<< HEAD
-  --secondary: #f1f1f1;
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-=======
   /* --secondary: #f1f1f1; */
   --secondary: #f5f5f5;
   --secondary-foreground: oklch(0.205 0 0);
   --muted: #777777;
->>>>>>> daa8903 (finalization ui)
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
@@ -134,11 +128,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-<<<<<<< HEAD
-    @apply bg-background text-foreground;
-=======
     @apply bg-[#EBEFF3] text-foreground;
->>>>>>> daa8903 (finalization ui)
   }
 }
 
