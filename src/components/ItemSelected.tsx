@@ -1,29 +1,36 @@
-'use client'
+"use client"
 
 import { Badge } from "./ui/badge"
 import { Button } from "./ui/button"
 import { Card, CardContent, CardHeader } from "./ui/card"
+import { useItemsStore } from "@/store/store"
+
 import { LuMonitorOff, LuGamepad2, LuMinus, LuPlus, LuTrash2 } from "react-icons/lu"
 import { Input } from "./ui/input"
 
-const InputPlusMinus = () => {
+
+const InputPlusMinus = ({ inputtype }: { inputtype: string }) => {
   return (
     <div className="flex justify-between items-center border rounded-lg bg-secondary w-1/2">
 
       <div className="flex justify-between items-center w-fit">
-        <Button variant={'ghost'} size={'sm'}>
+        <Button variant={"ghost"} size={"sm"}>
           <LuMinus className="size-3 font-black" strokeWidth={3} />
         </Button>
 
         <input type="number" className="h-9 w-full text-center" />
 
-        <Button variant={'ghost'} size={'sm'}>
+        <Button variant={"ghost"} size={"sm"}>
           <LuPlus className="size-3 font-black" strokeWidth={3} />
         </Button>
       </div>
 
-      <span className="text-xs lg:text-sm font-semibold w-auto mx-3 lg:mx-6 hidden lg:block">quantity</span>
-      <span className="text-xs lg:text-sm font-semibold w-auto mx-3 lg:mx-6 block lg:hidden">qty</span>
+      <span className="text-xs lg:text-sm font-semibold w-auto mx-3 lg:mx-6 hidden lg:block">
+        {inputtype === "qty" ? "quantity" : "hours/day"}
+      </span>
+      <span className="text-xs lg:text-sm font-semibold w-auto mx-3 lg:mx-6 block lg:hidden">
+        {inputtype === "qty" ? "qty" : "hrs"}
+      </span>
 
     </div>
   )
@@ -35,7 +42,7 @@ export const NoDataItemSelected = () => {
       <Card>
         <CardContent>
 
-          <div className="flex flex-col justify-center items-center w-full">
+          <div className="flex flex-col justify-center items-center w-full py-4">
             <div className="flex justify-center items-center w-18 h-auto aspect-square rounded-full bg-secondary mb-5">
               <LuMonitorOff className="size-8" strokeWidth={1.3} />
             </div>
@@ -50,37 +57,45 @@ export const NoDataItemSelected = () => {
 }
 
 const ItemSelected = () => {
+
+  const { items, addItem, removeItem } = useItemsStore()
+
   return (
-    <div>
-      <Card className="gap-0">
-        <CardHeader className="flex justify-between items-center">
-          <span>
-            Playstation 5 Slim
-          </span>
+    <div className="flex flex-col gap-5">
+      {items.map((item, i) => (
 
-          <Button className="flex items-center justify-center bg-red-200 hover:bg-red-400 w-8 h-auto aspect-square rounded-full">
-            <LuTrash2 className="text-red-800 size-4" />
-          </Button>
+        <Card className="gap-0">
+          <CardHeader className="flex justify-between items-center">
+            <span>
+              {item.title}
+            </span>
 
-        </CardHeader>
-        <CardContent className="flex flex-col justify-between h-35">
-          <div className="flex items-center gap-2 mt-2">
-            <Badge variant="default" className="text-xs lg:text-sm text-primary bg-[#FFFAC6]"><LuGamepad2 className="size-4!" /> Gaming</Badge>
-            <span className="text-muted text-xs lg:text-base">250 Watt</span>
-          </div>
+            <Button className="flex items-center justify-center bg-red-200 hover:bg-red-400 w-8 h-auto aspect-square rounded-full">
+              <LuTrash2 className="text-red-800 size-4" />
+            </Button>
 
-          <div className="">
-            <span className="flex justify-end text-muted text-xs lg:text-base mb-2">Rp 147.359/mth</span>
-            <div className="flex gap-3">
-
-              <InputPlusMinus />
-              <InputPlusMinus />
-
+          </CardHeader>
+          <CardContent className="flex flex-col justify-between h-35">
+            <div className="flex items-center gap-2 mt-2">
+              <Badge variant="gaming" className=""><LuGamepad2 className="size-4!" /> Gaming</Badge>
+              <span className="text-muted text-xs lg:text-base">250 Watt</span>
             </div>
-          </div>
 
-        </CardContent>
-      </Card>
+            <div className="">
+              <span className="flex justify-end text-muted text-xs lg:text-base mb-2">Rp 147.359/mth</span>
+              <div className="flex gap-3">
+
+                <InputPlusMinus inputtype="qty" />
+                <InputPlusMinus inputtype={"hrs"} />
+                {/* <InputPlusMinus /> */}
+
+              </div>
+            </div>
+
+          </CardContent>
+        </Card>
+
+      ))}
     </div>
   )
 }

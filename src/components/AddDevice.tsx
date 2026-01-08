@@ -1,67 +1,69 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
+'use client'
+
+import React from "react"
+import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { LuGamepad2, LuPlus } from "react-icons/lu";
-import { MdPhoneIphone } from "react-icons/md";
-import { Badge } from "./ui/badge";
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { LuGamepad2, LuPlus, LuMonitor  } from "react-icons/lu"
+import { MdPhoneIphone } from "react-icons/md"
+import { Badge } from "./ui/badge"
+
+import itemsData from "@/components/data/itemsData.json"
+import { useItemsStore } from "@/store/store"
 
 export function AddDevice() {
-  type Category = "gaming" | "gadget";
+  type Category = "home_appliance" | "work_device" | "gaming"
 
   type Item = {
-    name: string;
-    power: string;
-    category: Category;
-  };
+    title: string
+    icon: string
+    power: number
+    category: Category
+  }
 
-  const categories: Category[] = ["gaming", "gadget"];
+
+  const typedItemsData = itemsData as Item[]
+
+  const categories: Category[] = ["home_appliance", "work_device", "gaming"]
 
   const categoryConfig: Record<
     Category,
-    { label: string; icon: React.ReactNode }
+    {
+      label: string
+      icon: React.ReactNode
+    }
   > = {
+    home_appliance: {
+      label: "Home Appliance",
+      icon: <MdPhoneIphone className="size-4" />,
+    },
+    work_device: {
+      label: "Work Device",
+      icon: <LuMonitor className="size-4" />,
+    },
     gaming: {
       label: "Gaming",
       icon: <LuGamepad2 className="size-4" />,
     },
-    gadget: {
-      label: "Gadget",
-      icon: <MdPhoneIphone className="size-4" />,
-    },
-  };
+  }
 
-  const data: Item[] = [
-    { name: "PS5 Slim", power: "1200W", category: "gaming" },
-    { name: "Xbox Series X", power: "1000W", category: "gaming" },
-    { name: "iPhone 15", power: "20W", category: "gadget" },
-  ];
-
-//   const grouped = data.reduce<Record<Category, Item[]>>(
-//     (acc, item) => {
-//       acc[item.category].push(item);
-//       return acc;
-//     },
-//     {
-//       gaming: [],
-//       gadget: [],
-//     }
-//   );
-
-const grouped = data.reduce<Record<Category, Item[]>>(
+  const grouped = typedItemsData.reduce<Record<Category, Item[]>>(
     (acc, item) => {
-        acc[item.category].push(item)
-        return acc
-    },{
-        gaming: [],
-        gadget: []
-    }
+      acc[item.category].push(item)
+      return acc
+    }, {
+    home_appliance: [],
+    work_device: [],
+    gaming: []
+  }
   )
+
+  const { items, addItem, removeItem } = useItemsStore()
 
   return (
     <Dialog>
@@ -74,25 +76,34 @@ const grouped = data.reduce<Record<Category, Item[]>>(
 
       <DialogContent>
         <DialogTitle>Choose Device</DialogTitle>
+        <Button onClick={()=>alert(items)}>items</Button>
 
         <Input placeholder="search device..." />
 
-        {categories.map((category) => (
-          <div key={category} className="flex flex-col gap-4">
-            <Badge className="flex items-center gap-2">
-              {categoryConfig[category].icon}
-              {categoryConfig[category].label}
-            </Badge>
+        <hr />
 
-            {grouped[category].map((item, i) => (
-              <Button key={i} variant="secondary" className="justify-between">
-                <span>{item.name}</span>
-                <span>{item.power}</span>
-              </Button>
-            ))}
-          </div>
-        ))}
+        <div className="overflow-y-auto h-[250] md:h-[400]">
+
+          {categories.map((category) => (
+            <div key={category} className="flex flex-col gap-4 mb-4">
+              <Badge variant={category} className="flex items-center gap-2">
+                {categoryConfig[category].icon}
+                {categoryConfig[category].label}
+              </Badge>
+
+
+              {grouped[category].map((item, i) => (
+                <Button key={i} variant="secondary" className="justify-between" onClick={() => addItem(item)}>
+                  <span>{item.title}</span>
+                  <span>{item.power}</span>
+                </Button>
+              ))}
+            </div>
+          ))}
+
+        </div>
+
       </DialogContent>
     </Dialog>
-  );
+  )
 }

@@ -1,5 +1,7 @@
 import { Separator } from "@radix-ui/react-separator"
 import { Card, CardContent, CardHeader } from "./ui/card"
+import { LuCalendar } from "react-icons/lu"
+import { MdElectricBolt } from "react-icons/md"
 
 const PowerEstimation = () => {
 
@@ -16,11 +18,11 @@ const PowerEstimation = () => {
                 Power Estimation
             </CardHeader>
             <CardContent>
-                <div className="flex justify-between border bg-linear-to-t from-[#FAF5EB50] to-[#FAF5EB] rounded-xl p-3 h-30">
+                <div className="flex justify-between border bg-linear-to-t from-[#fff7e620] to-[#fff7e6] rounded-xl p-3 h-30">
 
                     <div className="flex flex-col justify-between w-1/2">
 
-                        <span className="text-sm"> Per Day </span>
+                        <span className="flex items-center gap-2 text-sm"> <LuCalendar />Per Day </span>
 
                         <div className="flex flex-col">
                             <span className="text-sm"> 231 kWh </span>
@@ -34,7 +36,7 @@ const PowerEstimation = () => {
 
                         <div className="flex flex-col justify-between ml-3">
 
-                            <span className="text-sm"> Per Day </span>
+                            <span className="flex items-center gap-2 text-sm"> <LuCalendar/> Per Month </span>
 
                             <div className="flex flex-col">
                                 <span className="text-sm"> 231 kWh </span>
@@ -46,9 +48,9 @@ const PowerEstimation = () => {
 
                 </div>
 
-                <div className="flex flex-col justify-between border bg-linear-to-t from-[#ebfaee50] to-[#ebfaee] h-23 p-3 mt-4 rounded-xl">
-                    <span className="text-xs lg:text-sm">
-                        Electricity rates
+                <div className="flex flex-col justify-between border bg-linear-to-t from-[#d3e8ff20] to-[#d3e8ff] h-23 p-3 mt-4 rounded-xl">
+                    <span className="flex items-center gap-2 text-xs lg:text-sm">
+                        <MdElectricBolt /> Electricity rates
                     </span>
 
                     <div className="flex justify-between text-lg font-semibold">
@@ -77,7 +79,7 @@ const PowerEstimation = () => {
 
 
                 <div className="text-muted/70 text-xs lg:text-sm mt-8">
-                    <p>Electricity rates: Rp1.699/kWh (PLN R-2 3.500 VA)</p>
+                    {/* <p>Electricity rates: Rp1.699/kWh (PLN R-2 3.500 VA)</p> */}
                     <p>This calculation is only an estimate, not a fixed price</p>
                 </div>
 

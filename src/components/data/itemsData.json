@@ -1,0 +1,153 @@
+[
+  {
+    "category": "home_appliance",
+    "title": "Air Conditioner 1 PK",
+    "icon": "FaSnowflake",
+    "power": 700
+  },
+  {
+    "category": "home_appliance",
+    "title": "Water Pump",
+    "icon": "FaWater",
+    "power": 500
+  },
+  {
+    "category": "home_appliance",
+    "title": "Rice Cooker",
+    "icon": "MdRiceBowl",
+    "power": 500
+  },
+  {
+    "category": "home_appliance",
+    "title": "Washing Machine",
+    "icon": "FaSoap",
+    "power": 350
+  },
+  {
+    "category": "home_appliance",
+    "title": "Water Dispenser",
+    "icon": "FaTint",
+    "power": 300
+  },
+  {
+    "category": "home_appliance",
+    "title": "Refrigerator",
+    "icon": "FaRegSnowflake",
+    "power": 150
+  },
+  {
+    "category": "work_device",
+    "title": "Workstation PC - i9 Gen 13 - RTX 4090",
+    "icon": "FaDesktop",
+    "power": 750
+  },
+  {
+    "category": "work_device",
+    "title": "Gaming PC - i7 Gen 13 - RTX 4070",
+    "icon": "FaDesktop",
+    "power": 550
+  },
+  {
+    "category": "work_device",
+    "title": "Gaming PC - i5 Gen 12 - RTX 3060",
+    "icon": "FaDesktop",
+    "power": 400
+  },
+  {
+    "category": "work_device",
+    "title": "Multimedia PC - i5 Gen 10 - iGPU",
+    "icon": "FaDesktop",
+    "power": 250
+  },
+  {
+    "category": "work_device",
+    "title": "Office PC - i3 Gen 10 - iGPU",
+    "icon": "FaDesktop",
+    "power": 150
+  },
+  {
+    "category": "work_device",
+    "title": "Laptop",
+    "icon": "FaLaptop",
+    "power": 60
+  },
+  {
+    "category": "work_device",
+    "title": "WiFi Router",
+    "icon": "FaWifi",
+    "power": 10
+  },
+  {
+    "category": "work_device",
+    "title": "Phone Charger",
+    "icon": "FaMobileAlt",
+    "power": 8
+  },
+
+  {
+    "category": "gaming",
+    "title": "PlayStation 5 Pro",
+    "icon": "FaGamepad",
+    "power": 230
+  },
+  {
+    "category": "gaming",
+    "title": "PlayStation 5 Fat",
+    "icon": "FaGamepad",
+    "power": 220
+  },
+  {
+    "category": "gaming",
+    "title": "PlayStation 5 Slim (No Disc)",
+    "icon": "FaGamepad",
+    "power": 200
+  },
+  {
+    "category": "gaming",
+    "title": "PlayStation 4 Pro",
+    "icon": "FaPlaystation",
+    "power": 185
+  },
+  {
+    "category": "gaming",
+    "title": "PlayStation 4 Fat",
+    "icon": "FaPlaystation",
+    "power": 160
+  },
+  {
+    "category": "gaming",
+    "title": "PlayStation 4 Slim",
+    "icon": "FaPlaystation",
+    "power": 120
+  },
+  {
+    "category": "gaming",
+    "title": "Xbox Series X",
+    "icon": "FaXbox",
+    "power": 215
+  },
+  {
+    "category": "gaming",
+    "title": "Xbox One X",
+    "icon": "FaXbox",
+    "power": 180
+  },
+  {
+    "category": "gaming",
+    "title": "Xbox One",
+    "icon": "FaXbox",
+    "power": 150
+  },
+  {
+    "category": "gaming",
+    "title": "Xbox One S",
+    "icon": "FaXbox",
+    "power": 120
+  },
+  {
+    "category": "gaming",
+    "title": "LED TV",
+    "icon": "FaTv",
+    "power": 100
+  }
+]

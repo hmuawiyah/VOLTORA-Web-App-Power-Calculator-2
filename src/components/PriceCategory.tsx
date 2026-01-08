@@ -18,7 +18,7 @@ const RadioPriceCategory = () => {
 
   const id = useId()
 
-  const data = [
+  const dataPriceCategory = [
     {
       title: "R-1",
       va: "900 VA",
@@ -39,13 +39,11 @@ const RadioPriceCategory = () => {
   return (
     <RadioGroup className='flex w-full' defaultValue='1'>
 
-      {data.map((val, i) => (
+      {dataPriceCategory.map((val, i) => (
         <div key={i} className='
         bg-secondary 
-<<<<<<< HEAD
-=======
         border
->>>>>>> daa8903 (finalization ui)
+        hover:brightness-95F
         
         has-data-[state=checked]:bg-linear-to-t 
         has-data-[state=checked]:from-[#449DFF]
@@ -55,7 +53,7 @@ const RadioPriceCategory = () => {
         
         has-focus-visible:ring-ring/50 
         has-focus-visible:ring-[3px]
-        relative w-full h-23 md:h-30 rounded-md p-2 md:p-3 shadow-xs outline-none 
+        relative w-full h-23 md:h-30 rounded-xl p-2 md:p-3 shadow-xs outline-none 
         '>
           <RadioGroupItem
             value={val.va}
