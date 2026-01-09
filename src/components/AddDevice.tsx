@@ -13,56 +13,12 @@ import { LuGamepad2, LuPlus, LuMonitor  } from "react-icons/lu"
 import { MdPhoneIphone } from "react-icons/md"
 import { Badge } from "./ui/badge"
 
-import itemsData from "@/components/data/itemsData.json"
 import { useItemsStore } from "@/store/store"
 
+import { categories, categoryConfig, grouped } from "@/components/data/categoryData"
+
 export function AddDevice() {
-  type Category = "home_appliance" | "work_device" | "gaming"
-
-  type Item = {
-    title: string
-    icon: string
-    power: number
-    category: Category
-  }
-
-
-  const typedItemsData = itemsData as Item[]
-
-  const categories: Category[] = ["home_appliance", "work_device", "gaming"]
-
-  const categoryConfig: Record<
-    Category,
-    {
-      label: string
-      icon: React.ReactNode
-    }
-  > = {
-    home_appliance: {
-      label: "Home Appliance",
-      icon: <MdPhoneIphone className="size-4" />,
-    },
-    work_device: {
-      label: "Work Device",
-      icon: <LuMonitor className="size-4" />,
-    },
-    gaming: {
-      label: "Gaming",
-      icon: <LuGamepad2 className="size-4" />,
-    },
-  }
-
-  const grouped = typedItemsData.reduce<Record<Category, Item[]>>(
-    (acc, item) => {
-      acc[item.category].push(item)
-      return acc
-    }, {
-    home_appliance: [],
-    work_device: [],
-    gaming: []
-  }
-  )
-
+  
   const { items, addItem, removeItem } = useItemsStore()
 
   return (
@@ -76,7 +32,7 @@ export function AddDevice() {
 
       <DialogContent>
         <DialogTitle>Choose Device</DialogTitle>
-        <Button onClick={()=>alert(items)}>items</Button>
+        <Button onClick={()=>alert(JSON.stringify(items))}>items</Button>
 
         <Input placeholder="search device..." />
 

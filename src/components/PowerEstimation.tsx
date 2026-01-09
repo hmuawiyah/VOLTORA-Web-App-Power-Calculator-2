@@ -2,9 +2,12 @@ import { Separator } from "@radix-ui/react-separator"
 import { Card, CardContent, CardHeader } from "./ui/card"
 import { LuCalendar } from "react-icons/lu"
 import { MdElectricBolt } from "react-icons/md"
+import { useItemsStore } from "@/store/store"
+
 
 const PowerEstimation = () => {
-
+    const { items, selectedPrice, setPrice, selectedPriceNumber } = useItemsStore()
+    const getPrice = useItemsStore(state => state.selectedPriceNumber)
 
     const data = [
         { name: "Playstation 5 Slim", kwh: "351 kWh", price: "Rp 35.401" },
@@ -12,8 +15,12 @@ const PowerEstimation = () => {
         { name: "Air Conditioner", kwh: "132 kWh", price: "Rp 250.309" },
     ]
 
+    const totalkWh = items.reduce((acc, item) => acc + (item.power * item.hrs * item.qty), 0) / 1000
+
+    
+
     return (
-        <Card className="gap-2">
+        <Card className="gap-2" id="my-node">
             <CardHeader>
                 Power Estimation
             </CardHeader>
@@ -25,9 +32,9 @@ const PowerEstimation = () => {
                         <span className="flex items-center gap-2 text-sm"> <LuCalendar />Per Day </span>
 
                         <div className="flex flex-col">
-                            <span className="text-sm"> 231 kWh </span>
+                            <span className="text-sm"> {totalkWh} kWh </span>
 
-                            <span className="text-lg font-semibold"> Rp 23.401 </span>
+                            <span className="text-lg font-semibold"> Rp {((totalkWh) * (getPrice().kwh ?? 0)).toLocaleString("id-ID")} </span>
                         </div>
                     </div>
 
@@ -36,12 +43,12 @@ const PowerEstimation = () => {
 
                         <div className="flex flex-col justify-between ml-3">
 
-                            <span className="flex items-center gap-2 text-sm"> <LuCalendar/> Per Month </span>
+                            <span className="flex items-center gap-2 text-sm"> <LuCalendar /> Per Month </span>
 
                             <div className="flex flex-col">
-                                <span className="text-sm"> 231 kWh </span>
+                                <span className="text-sm"> {totalkWh * 30} kWh </span>
 
-                                <span className="text-lg font-semibold"> Rp 23.401 </span>
+                                <span className="text-lg font-semibold"> Rp {((totalkWh * 30) * (getPrice().kwh ?? 0)).toLocaleString("id-ID")} </span>
                             </div>
                         </div>
                     </div>
@@ -55,22 +62,22 @@ const PowerEstimation = () => {
 
                     <div className="flex justify-between text-lg font-semibold">
                         <span>
-                            Rp1.699/kWh
+                            Rp {getPrice().kwh?.toLocaleString("id-ID") ?? 0}/kWh
                         </span>
                         <span>
-                            PLN R-2 3.500 VA
+                            {getPrice() && (<> PLN {getPrice().title} {getPrice().va} VA </>)}
                         </span>
                     </div>
                 </div>
 
 
                 <Card className="w-full rounded-xl bg-secondary p-0! gap-0 shadow-none mt-4">
-                    {data.map((item, i) => (
+                    {items.length > 0 && items.map((item, i) => (
                         <div key={i}>
                             <div className="flex items-center justify-between px-5 py-4 text-xs lg:text-sm">
-                                <span className="font-medium w-[35%]">{item.name}</span>
-                                <span className="text-muted-foreground text-right w-[30%]">{item.kwh}</span>
-                                <span className="font-medium text-right w-[30%]">{item.price}</span>
+                                <span className="font-medium w-[35%]">{item.title}</span>
+                                <span className="text-muted-foreground text-right w-[30%]">{item.power * item.hrs * item.qty / 1000} kWh</span>
+                                <span className="font-medium text-right w-[30%]">Rp {(item.power * item.hrs * item.qty / 1000 * getPrice().kwh).toLocaleString("id-ID")}</span>
                             </div>
                             {i !== data.length - 1 && <hr />}
                         </div>
@@ -79,7 +86,6 @@ const PowerEstimation = () => {
 
 
                 <div className="text-muted/70 text-xs lg:text-sm mt-8">
-                    {/* <p>Electricity rates: Rp1.699/kWh (PLN R-2 3.500 VA)</p> */}
                     <p>This calculation is only an estimate, not a fixed price</p>
                 </div>
 

@@ -8,27 +8,44 @@ import { useItemsStore } from "@/store/store"
 import { LuMonitorOff, LuGamepad2, LuMinus, LuPlus, LuTrash2 } from "react-icons/lu"
 import { Input } from "./ui/input"
 
+import { Item, categories, categoryConfig, grouped } from "@/components/data/categoryData"
 
-const InputPlusMinus = ({ inputtype }: { inputtype: string }) => {
+const InputPlusMinus = ({ inputtype, index, inputvalue }: { inputtype: string, index: number, inputvalue: number }) => {
+
+  const { addQty, decreaseQty, setQty, addHrs, decreaseHrs, setHrs } = useItemsStore()
+
   return (
     <div className="flex justify-between items-center border rounded-lg bg-secondary w-1/2">
 
-      <div className="flex justify-between items-center w-fit">
-        <Button variant={"ghost"} size={"sm"}>
+      <div className="flex justify-between items-center w-fit" >
+        <Button variant={"ghost"} size={"sm"}
+          onClick={() => {
+            inputtype == "qty" && decreaseQty(index)
+            inputtype == "hrs" && decreaseHrs(index)
+          }}
+        >
           <LuMinus className="size-3 font-black" strokeWidth={3} />
         </Button>
 
-        <input type="number" className="h-9 w-full text-center" />
+        <input type="number" value={inputtype === "qty" ? inputvalue : inputvalue} onChange={(e) => {
+          if (inputtype === "qty") setQty(Number(e.target.value), index)
+          if (inputtype === "hrs") setHrs(Number(e.target.value), index)
+        }} className="h-9 w-full text-center" />
 
-        <Button variant={"ghost"} size={"sm"}>
+        <Button variant={"ghost"} size={"sm"}
+          onClick={() => {
+            if (inputtype === "qty") addQty(index)
+            if (inputtype === "hrs") addHrs(index)
+          }}
+        >
           <LuPlus className="size-3 font-black" strokeWidth={3} />
         </Button>
       </div>
 
-      <span className="text-xs lg:text-sm font-semibold w-auto mx-3 lg:mx-6 hidden lg:block">
+      <span className="text-xs lg:text-sm font-semibold w-auto mx-4 hidden lg:block">
         {inputtype === "qty" ? "quantity" : "hours/day"}
       </span>
-      <span className="text-xs lg:text-sm font-semibold w-auto mx-3 lg:mx-6 block lg:hidden">
+      <span className="text-xs lg:text-sm font-semibold w-auto mx-3 block lg:hidden">
         {inputtype === "qty" ? "qty" : "hrs"}
       </span>
 
@@ -64,7 +81,7 @@ const ItemSelected = () => {
     <div className="flex flex-col gap-5">
       {items.map((item, i) => (
 
-        <Card className="gap-0">
+        <Card className="gap-0" key={i}>
           <CardHeader className="flex justify-between items-center">
             <span>
               {item.title}
@@ -77,17 +94,18 @@ const ItemSelected = () => {
           </CardHeader>
           <CardContent className="flex flex-col justify-between h-35">
             <div className="flex items-center gap-2 mt-2">
-              <Badge variant="gaming" className=""><LuGamepad2 className="size-4!" /> Gaming</Badge>
-              <span className="text-muted text-xs lg:text-base">250 Watt</span>
+
+              <Badge variant={item.category} className="">{categoryConfig[item.category].icon} {categoryConfig[item.category].label}</Badge>
+
+              <span className="text-muted text-xs lg:text-base">{item.power} W</span>
             </div>
 
             <div className="">
               <span className="flex justify-end text-muted text-xs lg:text-base mb-2">Rp 147.359/mth</span>
               <div className="flex gap-3">
 
-                <InputPlusMinus inputtype="qty" />
-                <InputPlusMinus inputtype={"hrs"} />
-                {/* <InputPlusMinus /> */}
+                <InputPlusMinus inputtype="qty" index={i} inputvalue={item.qty ?? ""} />
+                <InputPlusMinus inputtype="hrs" index={i} inputvalue={item.hrs ?? ""} />
 
               </div>
             </div>

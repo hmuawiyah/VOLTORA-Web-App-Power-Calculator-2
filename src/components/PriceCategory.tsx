@@ -13,37 +13,21 @@ import { useId } from 'react'
 
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-
+import { dataPriceCategory } from "./data/dataPriceCategory"
+import { useItemsStore } from "@/store/store"
 const RadioPriceCategory = () => {
 
   const id = useId()
-
-  const dataPriceCategory = [
-    {
-      title: "R-1",
-      va: "900 VA",
-      kwh: "Rp1.352/kWh"
-    },
-    {
-      title: "R-2",
-      va: "3.500 VA",
-      kwh: "Rp1.699/kWh"
-    },
-    {
-      title: "R-3",
-      va: "6.600 VA",
-      kwh: "Rp1.699/kWh"
-    },
-  ]
+  const { selectedPrice, setPrice, selectedPriceNumber } = useItemsStore()
 
   return (
-    <RadioGroup className='flex w-full' defaultValue='1'>
+    <RadioGroup className='flex w-full' defaultValue='1' onValueChange={(value) => setPrice(value)}>
 
       {dataPriceCategory.map((val, i) => (
         <div key={i} className='
         bg-secondary 
         border
-        hover:brightness-95F
+        hover:brightness-95
         
         has-data-[state=checked]:bg-linear-to-t 
         has-data-[state=checked]:from-[#449DFF]
@@ -56,7 +40,7 @@ const RadioPriceCategory = () => {
         relative w-full h-23 md:h-30 rounded-xl p-2 md:p-3 shadow-xs outline-none 
         '>
           <RadioGroupItem
-            value={val.va}
+            value={String(val.title)}
             id={val.title}
             className='peer sr-only'
             aria-label='plan-radio-basic'
@@ -70,16 +54,15 @@ const RadioPriceCategory = () => {
         peer-data-[state=checked]:text-white
         peer-data-[state=checked]:[&_p]:text-white
           '>
-            {/* peer-data[state=checked]:text-blue-300  */}
             <div className='flex w-full items-center justify-between text-xl font-medium'>
               <span className="text-base lg:text-lg xl:text-2xl">{val.title}</span>
             </div>
             <div className="">
               <p className='text-xs xl:text-sm'>
-                {val.va}
+                {(val.va).toLocaleString('id-ID')} VA
               </p>
               <p className='text-xs xl:text-sm'>
-                {val.kwh}
+                Rp {(val.kwh).toLocaleString('id-ID')}/kWh
               </p>
             </div>
           </Label>
@@ -91,6 +74,10 @@ const RadioPriceCategory = () => {
 }
 
 const PriceCategory = () => {
+  
+  const { selectedPrice, setPrice, selectedPriceNumber } = useItemsStore()
+  const getPrice = useItemsStore(state => state.selectedPriceNumber)
+
   return (
     <div>
       <Card>
@@ -100,6 +87,8 @@ const PriceCategory = () => {
         <CardContent className="flex justify-center w-full">
           <RadioPriceCategory />
         </CardContent>
+          {/* <Button onClick={() => alert(String(selectedPrice))}>selectedPrice</Button>
+          <Button onClick={() => alert(getPrice().kwh)}>getPrice()</Button> */}
       </Card>
     </div>
   )
