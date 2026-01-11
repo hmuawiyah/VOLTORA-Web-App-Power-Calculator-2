@@ -81,7 +81,7 @@ const PowerEstimation = () => {
 
 
                 <div className="text-muted/70 text-xs lg:text-sm mt-8">
-                    <p>Electricy Rate Price on is per day</p>
+                    <p>Electricy Rate Price is on per day</p>
                     <p>This calculation is only an estimate, not a fixed price</p>
                 </div>
 
