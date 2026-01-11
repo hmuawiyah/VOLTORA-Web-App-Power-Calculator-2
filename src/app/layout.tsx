@@ -34,8 +34,6 @@ export default function RootLayout({
           <Navbar />
           {children}
 
-          
-
         </ThemeProvider>
       </body>
     </html>
