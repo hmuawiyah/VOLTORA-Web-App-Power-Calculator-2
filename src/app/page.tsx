@@ -72,7 +72,7 @@ export default function Home() {
         </div>
 
         <div className="w-full">
-          <p className="text-right text-black/50 text-sm mb-5 mx-5 md:mx-20 xl:mx-40 mt-18">@2025 Husein’s Web App Power Calculator</p>
+          <p className="text-right text-muted text-sm mb-5 mx-5 md:mx-20 xl:mx-40 mt-18">@2025 Husein’s Web App Power Calculator</p>
         </div>
       </div>
     </>

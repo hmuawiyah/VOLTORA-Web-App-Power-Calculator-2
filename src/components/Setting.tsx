@@ -68,18 +68,16 @@ const Setting = () => {
                     <NavigationMenuList>
                         <NavigationMenuItem>
                             <Link href={"https://github.com/hmuawiyah"} target={"_blank"}>
-                                <Button variant={"secondary"} size={"sm"}>
+                                <Button variant={"secondary"} className="border">
                                     <FaGithub />  <span className="hidden sm:inline">Github</span>
                                 </Button>
                             </Link>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
-                            <NavigationMenuTrigger className="flex gap-1">
+                            <NavigationMenuTrigger className="flex gap-2.5">
                                 <span className="hidden sm:inline">Theme</span>
-                                <LuSun
-                                    className={`size-4.5 md:size-5 ${theme === "light" ? "text-yellow-500" : "text-muted-foreground"
-                                        }`}
-                                />
+                                <LuSun className={`size-5 ${theme === "light" ? "text-yellow-500" : "hidden" }`} />
+                                <LuMoon className={`md:size-5 ${theme === "dark" ? "text-[#3589E5]" : "hidden" }`} />
                             </NavigationMenuTrigger>
                             <NavigationMenuContent>
                                 <NavigationMenuLink>

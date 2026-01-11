@@ -37,7 +37,7 @@ function NavigationMenuList({
     <NavigationMenuPrimitive.List
       data-slot="navigation-menu-list"
       className={cn(
-        "group flex flex-1 list-none items-center justify-center gap-2 md:gap-3",
+        "group flex flex-1 list-none items-center justify-center gap-1 md:gap-3",
         className
       )}
       {...props}
@@ -59,7 +59,7 @@ function NavigationMenuItem({
 }
 
 const navigationMenuTriggerStyle = cva(
-  "bg-secondary border hover:brightness-90 h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5 group inline-flex w-max items-center justify-center rounded-md text-sm font-medium disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-accent  data-[state=open]:bg-accent/50 focus-visible:ring-ring/50 outline-none transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1"
+  "bg-secondary border hover:brightness-90 h-9.5 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5 group inline-flex w-max items-center justify-center rounded-md text-sm font-medium disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-accent  data-[state=open]:bg-accent/50 focus-visible:ring-ring/50 outline-none transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1"
 )
 
 function NavigationMenuTrigger({
@@ -106,7 +106,7 @@ function NavigationMenuViewport({
   return (
     <div
       className={cn(
-        "absolute top-full left-0 isolate z-50 flex justify-center"
+        "absolute top-full left-0 translate-x-[43px] md:translate-x-[100.24px] isolate z-50 flex justify-center"
       )}
     >
       <NavigationMenuPrimitive.Viewport
