@@ -34,7 +34,6 @@ export default function RootLayout({
           <Navbar />
           {children}
 
-          {/* <div className="mb-400"></div> */}
         </ThemeProvider>
       </body>
     </html>

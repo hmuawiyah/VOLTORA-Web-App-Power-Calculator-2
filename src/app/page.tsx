@@ -1,5 +1,8 @@
 "use client"
 
+import { useEffect } from "react"
+import { decodeShareState } from "@/lib/shareCode"
+
 import { AddDevice } from "@/components/AddDevice"
 import ItemSelected, { NoDataItemSelected } from "@/components/ItemSelected"
 import PowerEstimation from "@/components/PowerEstimation"
@@ -13,7 +16,24 @@ import { LuRotateCcw } from "react-icons/lu"
 
 export default function Home() {
 
-  const { items, addItem, removeItem, resetItems } = useItemsStore()
+  const { items, addItem, removeItem, resetItems, setPrice } = useItemsStore()
+
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const code = params.get("code")
+
+    if (!code) return
+
+    const state = decodeShareState(code)
+    if (!state) return
+
+    resetItems()
+    state.items.forEach(addItem)
+    setPrice(state.selectedPrice)
+  }, [])
+
+
 
   return (
     <div className="flex flex-wrap justify-between lg:min-h-[150vh] mx-5 md:mx-20 xl:mx-40 mt-18 gap-5 md:gap-0">

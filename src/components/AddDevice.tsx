@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
+  DialogClose,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
@@ -48,7 +49,7 @@ export function AddDevice() {
         <DialogTitle>Choose Device</DialogTitle>
         <Button onClick={() => alert(JSON.stringify(items))}>items</Button>
 
-        <Input placeholder="search device..." value={search} onChange={e => setSearch(e.target.value)} />
+        <Input placeholder="search device..." className={'bg-background dark:bg-background'} value={search} onChange={e => setSearch(e.target.value)} />
 
         <hr />
 
@@ -62,15 +63,17 @@ export function AddDevice() {
               </Badge>
 
               {items.map((item, i) => (
-                <Button
-                  key={i}
-                  variant="secondary"
-                  className="justify-between"
-                  onClick={() => addItem(item)}
-                >
-                  <span>{item.title}</span>
-                  <span>{item.power}</span>
-                </Button>
+                <DialogClose key={i} asChild>
+                  <Button
+                    
+                    variant="secondary"
+                    className="justify-between"
+                    onClick={() => addItem(item)}
+                  >
+                    <span>{item.title}</span>
+                    <span>{item.power}</span>
+                  </Button>
+                </DialogClose>
               ))}
             </div>
           ))}

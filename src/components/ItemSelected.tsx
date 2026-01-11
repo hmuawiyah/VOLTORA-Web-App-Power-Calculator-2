@@ -76,7 +76,6 @@ export const NoDataItemSelected = () => {
 const ItemSelected = () => {
 
   const { items, addItem, removeItem } = useItemsStore()
-  // const totalkWh = items.reduce((acc, item) => acc + (item.power * item.hrs * item.qty), 0) / 1000
   const getPrice = useItemsStore(state => state.selectedPriceNumber)
 
   return (
@@ -89,7 +88,8 @@ const ItemSelected = () => {
               {item.title}
             </span>
 
-            <Button className="flex items-center justify-center bg-red-200 hover:bg-red-400 w-8 h-auto aspect-square rounded-full">
+            <Button className="flex items-center justify-center bg-red-200 hover:bg-red-400 w-8 h-auto aspect-square rounded-full"
+            onClick={() => removeItem(i)}>
               <LuTrash2 className="text-red-800 size-4" />
             </Button>
 

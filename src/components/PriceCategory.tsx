@@ -21,7 +21,7 @@ const RadioPriceCategory = () => {
   const { selectedPrice, setPrice, selectedPriceNumber } = useItemsStore()
 
   return (
-    <RadioGroup className='flex w-full' defaultValue='1' onValueChange={(value) => setPrice(value)}>
+    <RadioGroup className='flex w-full' value={selectedPrice} onValueChange={(value) => setPrice(value)}>
 
       {dataPriceCategory.map((val, i) => (
         <div key={i} className='
@@ -87,8 +87,6 @@ const PriceCategory = () => {
         <CardContent className="flex justify-center w-full">
           <RadioPriceCategory />
         </CardContent>
-          {/* <Button onClick={() => alert(String(selectedPrice))}>selectedPrice</Button>
-          <Button onClick={() => alert(getPrice().kwh)}>getPrice()</Button> */}
       </Card>
     </div>
   )

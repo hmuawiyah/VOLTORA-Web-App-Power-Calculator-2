@@ -5,30 +5,50 @@ import { Card, CardContent } from "./ui/card"
 import { Switch } from '@/components/ui/switch'
 import { LuSun, LuMoon, LuShare2, LuDownload } from "react-icons/lu"
 import { Button } from "./ui/button"
-// import { LuSun, LuMoon } from "react-icons/lu"
-// import { Switch } from "@/components/ui/switch"
 
 import * as htmlToImage from "html-to-image"
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image"
 
-const Setting = () => {
 
-    const handleDownload = () => {
-        htmlToImage
-            .toJpeg(document.getElementById('my-node'), { quality: 1 })
-            .then(function (dataUrl) {
-                var link = document.createElement('a');
-                link.download = 'power-estimation.jpeg';
-                link.href = dataUrl;
-                link.click();
-            });
+import { encodeShareState } from "@/lib/shareCode"
+import { useItemsStore } from "@/store/store"
+
+
+const Setting = () => {
+    const { items, selectedPrice } = useItemsStore()
+
+    const handleShare = async () => {
+        const state = {
+            items,
+            selectedPrice,
+        }
+
+        const code = encodeShareState(state)
+        const url = `${location.origin}?code=${code}`
+
+        await navigator.clipboard.writeText(url)
+        alert("Link copied 🔥")
     }
 
-    const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
 
-  useEffect(() => setMounted(true), [])
-  if (!mounted) return null
+    const handleDownload = async () => {
+        const node = document.getElementById("my-node")
+        if (!node) return
+
+        const dataUrl = await htmlToImage.toJpeg(node, { quality: 1 })
+
+        const link = document.createElement("a")
+        link.download = "power-estimation.jpeg"
+        link.href = dataUrl
+        link.click()
+    }
+
+
+    const { theme, setTheme } = useTheme()
+    const [mounted, setMounted] = useState(false)
+
+    useEffect(() => setMounted(true), [])
+    if (!mounted) return null
 
     return (
         <>
@@ -43,13 +63,9 @@ const Setting = () => {
                         checked={theme === "dark"}
                         onCheckedChange={(v) => setTheme(v ? "dark" : "light")}
                         className="
+                        data-[state=unchecked]:bg-gray-300
                         data-[state=checked]:bg-[#3589E5]
                         "
-                        // focus-visible:border-ring-sky-600
-                        // dark:focus-visible:border-ring-sky-400
-                            // focus-visible:ring-sky-600/20
-                            // dark:focus-visible:ring-sky-400/40
-                            // dark:data-[state=checked]:bg-sky-400
                         aria-label="Theme Switch"
                     />
 
@@ -58,10 +74,11 @@ const Setting = () => {
                             }`}
                         strokeWidth={1.7}
                     />
+
                 </div>
 
                 <div className="flex gap-2">
-                    <Button variant={'primary'} size={'sm'}>
+                    <Button variant={'primary'} size={'sm'} onClick={handleShare}>
                         <LuShare2 />  <span className="hidden sm:inline">Share</span>
                     </Button>
                     <Button variant={'primary'} size={'sm'} onClick={handleDownload}>

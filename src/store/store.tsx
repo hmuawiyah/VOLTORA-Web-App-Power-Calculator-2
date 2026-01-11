@@ -116,6 +116,7 @@ export const useItemsStore = create<Store>(
             })),
 
         search: "",
+        
         setSearch: (value) =>
             set(() => ({
                 search: value
