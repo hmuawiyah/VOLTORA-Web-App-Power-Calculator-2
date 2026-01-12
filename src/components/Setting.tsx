@@ -25,6 +25,7 @@ import { FaGithub } from "react-icons/fa6"
 import * as htmlToImage from "html-to-image"
 import { encodeShareState } from "@/lib/shareCode"
 
+import toast from 'react-hot-toast'
 
 const Setting = () => {
     const { items, selectedPrice } = useItemsStore()
@@ -39,7 +40,7 @@ const Setting = () => {
         const url = `${location.origin}?code=${code}`
 
         await navigator.clipboard.writeText(url)
-        alert("Link copied 🔥")
+        toast.success('Link copied!')
     }
 
 
@@ -76,8 +77,8 @@ const Setting = () => {
                         <NavigationMenuItem>
                             <NavigationMenuTrigger className="flex gap-2.5">
                                 <span className="hidden sm:inline">Theme</span>
-                                <LuSun className={`size-5 ${theme === "light" ? "text-yellow-500" : "hidden" }`} />
-                                <LuMoon className={`md:size-5 ${theme === "dark" ? "text-[#3589E5]" : "hidden" }`} />
+                                <LuSun className={`size-5 ${theme === "light" ? "text-yellow-500" : "hidden"}`} />
+                                <LuMoon className={`md:size-5 ${theme === "dark" ? "text-[#3589E5]" : "hidden"}`} />
                             </NavigationMenuTrigger>
                             <NavigationMenuContent>
                                 <NavigationMenuLink>
